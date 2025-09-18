@@ -46,12 +46,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct ProcurementAIappApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @StateObject private var store = NoticeStore()
-
-    init() {
-        // Pass store into AppDelegate so it can refresh when push arrives
-        AppDelegate.store = store
-    }
+    @StateObject var store = NoticeStore()
 
     var body: some Scene {
         WindowGroup {
@@ -70,10 +65,13 @@ struct ProcurementAIappApp: App {
                     .tabItem {
                         Label("Bulletin", systemImage: "megaphone")
                     }
+                AccountView(store: store)
+                    .tabItem {
+                        Label("Account", systemImage: "person.crop.circle")
+                    }
             }
             .onAppear {
-                // Initial fetch when app launches
-                store.fetchBulletinBoard()
+                AppDelegate.store = store
                 // Register for silent CloudKit pushes
                 UIApplication.shared.registerForRemoteNotifications()
             }

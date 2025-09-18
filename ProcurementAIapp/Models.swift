@@ -89,3 +89,16 @@ extension Notice {
         return record
     }
 }
+extension Notice {
+    static var mock: Notice {
+        Notice(
+            type: .tender,
+            fields: [
+                FormField(key: "Title",     value: "Sample Tender",   tooltip: ""),
+                FormField(key: "Authority", value: "City Council",    tooltip: ""),
+                FormField(key: "Value",     value: "£1,000,000",      tooltip: ""),
+                FormField(key: "Deadline",  value: "31/12/2025",      tooltip: "")
+            ]
+        )
+    }
+}

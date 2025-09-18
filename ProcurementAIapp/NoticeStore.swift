@@ -7,6 +7,7 @@
 
 import Foundation
 import CloudKit
+import Combine
 
 class NoticeStore: ObservableObject {
     @Published var notices: [Notice] = []           // local drafts
@@ -15,7 +16,6 @@ class NoticeStore: ObservableObject {
     private var database = CKContainer.default().publicCloudDatabase
 
     init() {
-        fetchBulletinBoard()
         subscribeToChanges()
     }
 
